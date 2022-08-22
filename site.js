@@ -9,19 +9,34 @@ $(function() {
             action: 'type',
             strings: ["ls -l^400"],
             output: [$('.ls-output').html()],
+            postDelay: 2000
+        },
+        {
+            action: 'type',
+            strings: ['hrm.. let me show you some of my work','', 'actually, the mood just isn\'t quite <i>right...</i>', ''],
+            postDelay: 1000
+        },
+        {
+            action: 'type',
+            strings: ['./make-it-rain.sh^400'],
+            output: ['<script> $("#rain-container").removeClass("disabled")</script><br>'],
+            postDelay: 2500
+        },
+        {
+            action: 'type',
+            strings: ['ahh, very relaxing', '', 'okay, let me show you something', ''],
             postDelay: 1000
         },
         { 
             action: 'type',
             strings: ["cd Projects/my-portfolio^400"],
-            output: [' '],
+            output: [''],
             postDelay: 500
         },
         { 
             action: 'type',
             //clear: true,
             strings: ['make web^400'],
-            // output: $('.mimik-run-output').html(),
             output: [
                 'docker-compose run --rm install',
                 'Creating my-portfolio ... <span class="green">done</span>',
@@ -32,7 +47,7 @@ $(function() {
                 'To address issues that do not require attention, run: ',
                 '&nbsp; npm audit fix',
                 '<br>',
-                'To address all issues (indcluding breaking changes), run: ',
+                'To address all issues (including breaking changes), run: ',
                 '&nbsp; npm audit fix --force',
                 '<br>',
                 'Run `npm audit` for details.',
@@ -53,7 +68,7 @@ $(function() {
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span> <span class="blue">i</span> <span class="gray">[wds]</span>: webpack output is served from',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span> <span class="blue">i</span> <span class="gray">[wds]</span>: Content not from webpack is served from /usr/src/public',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span> <span class="blue">i</span> <span class="gray">[wds]</span>: 404s will fallback to /',
-                '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span> Starting the development server...',
+                '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span> Starting the development server..',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
@@ -61,16 +76,13 @@ $(function() {
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span> &nbsp; Local: &nbsp;&nbsp;&nbsp;&nbsp; http://localhost:3000',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span> &nbsp; On Your Network: <span class="yellow">https://austin-coffman.github.io/</span>',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
+                '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
+                '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
+                '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
                 '<br>'
             ],
-            outputDelay: 100,
-            postDelay: 100
-        },
-        { 
-            action: 'type',
-            strings: ["hello"],
-            output: ['&nbsp;'],
-            postDelay: 500
+            outputDelay: 300,
+            postDelay: 1000
         },
         
     
@@ -91,7 +103,7 @@ $(function() {
             $('.typed-cursor').text('');
             prompt.typed({
               strings: script.strings,
-              typeSpeed: 45,
+              typeSpeed: 60,
               callback: function() {
                 var history = $('.history').html();
                 history = history ? [history] : [];
@@ -105,7 +117,7 @@ $(function() {
                                     history.push(element);
                                     prompt.html('');
                                     $('.history').html(history.join('<br>'));
-                                    
+                                    $('section.terminal').scrollTop($('section.terminal').height());
                                 }, script.outputDelay*(index+1));
                             })
 
@@ -155,4 +167,54 @@ $(function() {
             break;
       }
   }
+
+
+  $(function(){
+
+ 
+
+  var makeItRain = function() {
+    //clear out everything
+    $('.rain').empty();
   
+    var increment = 0;
+    var drops = "";
+    var backDrops = "";
+  
+    while (increment < 100) {
+      //couple random numbers to use for various randomizations
+      //random number between 98 and 1
+      var randoHundo = (Math.floor(Math.random() * (98 - 1 + 1) + 1));
+      //random number between 5 and 2
+      var randoFiver = (Math.floor(Math.random() * (5 - 2 + 1) + 2));
+      //increment
+      increment += randoFiver;
+      //add in a new raindrop with various randomizations to certain CSS properties
+      drops += '<div class="drop" style="left: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
+      backDrops += '<div class="drop" style="right: ' + increment + '%; bottom: ' + (randoFiver + randoFiver - 1 + 100) + '%; animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"><div class="stem" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div><div class="splat" style="animation-delay: 0.' + randoHundo + 's; animation-duration: 0.5' + randoHundo + 's;"></div></div>';
+    }
+  
+    $('.rain.front-row').append(drops);
+    $('.rain.back-row').append(backDrops);
+  }
+  
+  $('.splat-toggle.toggle').on('click', function() {
+    $('body').toggleClass('splat-toggle');
+    $('.splat-toggle.toggle').toggleClass('active');
+    makeItRain();
+  });
+  
+  $('.back-row-toggle.toggle').on('click', function() {
+    $('body').toggleClass('back-row-toggle');
+    $('.back-row-toggle.toggle').toggleClass('active');
+    makeItRain();
+  });
+  
+  $('.single-toggle.toggle').on('click', function() {
+    $('body').toggleClass('single-toggle');
+    $('.single-toggle.toggle').toggleClass('active');
+    makeItRain();
+  });
+  
+  makeItRain();
+})
