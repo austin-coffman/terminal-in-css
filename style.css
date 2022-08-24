@@ -3,6 +3,9 @@ body {
     margin: 0;
     overflow: hidden;
     background: linear-gradient(to bottom, #202020, #111119);
+    color: white;
+    font-family: Menlo, Monaco, "Consolas", "Courier New", "Courier";
+    font-size: 11pt;
   }
   
   .disabled{
@@ -23,15 +26,16 @@ body {
     margin: auto;
     position: absolute;
     top: 10%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  -ms-transform: translateX(50%);
-  transform: translateX(50%);
-  right: 50%
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -ms-transform: translateX(50%);
+    transform: translateX(50%);
+    right: 50%;
+    box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.4);
   }
   
   .terminal-window header {
-    background: #E0E8F0;
+    background: #191919;
     height: 30px;
     border-radius: 8px 8px 0 0;
     padding-left: 10px;
@@ -69,6 +73,14 @@ body {
     top: 30px;
     bottom: 0;
     overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    flex-direction: column-reverse;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .terminal-window section.terminal::-webkit-scrollbar {
+    display: none;
   }
   
   .terminal-window section.terminal .typed-cursor {
@@ -102,7 +114,139 @@ body {
   .terminal-window .blue {color: blue;}
   .terminal-window .lightblue {color: lightblue;}
 
+  .terminal-minimized {
+    transform: scale(0.0001);
+  }
 
+  .iframe {
+    border: none;
+    flex-grow: 1;
+    overflow: auto;
+    margin-right: -18px;
+  }
+
+  .iframe-container {
+    display: flex; 
+    width: 100%; 
+    height: 100%; 
+    flex-direction: column; 
+    overflow: hidden;
+  }
+  
+  .popup-window {
+    text-align: left;
+    width: 65%;
+    height: 75%;
+    border-radius: 10px;
+    margin: auto;
+    position: absolute;
+    top: 4%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    -ms-transform: translateX(58%);
+    transform: translateX(58%);
+    right: 50%;
+    z-index: 10;
+    box-shadow: 0 4px 8px 4px rgba(0, 0, 0, 0.4);
+  }
+  
+  .popup-window header {
+    background: #191919;
+    height: 50px;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .popup-window header .button {
+    width: 12px;
+    height: 12px;
+    margin: 10px 4px 0 0;
+    display: inline-block;
+    border-radius: 8px;
+  }
+
+  .popup-window header .button-container{
+    padding-left: 10px;
+  }
+  
+  .popup-window header .button.green {
+    background: #3BB662;
+  }
+  
+  .popup-window header .button.yellow {
+    background: #E5C30F;
+  }
+  
+  .popup-window header .button.red {
+    background: #E75448;
+  }
+  
+  .popup-window section.popup-text {
+    color: white;
+    font-family: Menlo, Monaco, "Consolas", "Courier New", "Courier";
+    font-size: 11pt;
+    background: #30353A;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    top: 65px;
+    bottom: 0;
+    overflow: auto;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .popup-text::-webkit-scrollbar{
+    display: none;  /* Safari and Chrome */
+  }
+
+  .urlBar{
+    margin-top: 5px;
+    padding:7px;
+    overflow: auto;
+    background:#30353A;
+    display: flex;
+  }
+
+  .browserControls{
+    float:left;    
+    overflow:hidden;
+    display: flex;
+  }
+  
+  .browserControls .control{
+    float:left;
+    margin-top:2px;
+    margin-right:5px;
+    height:16px;
+    width:16px;
+    opacity:.2;
+    display: flex;
+  }
+  
+  .back{
+    background:url(https://i.imgur.com/lU9YmE4.png) -64px no-repeat;
+  }
+  
+  
+  .forward{
+    background:url(https://i.imgur.com/lU9YmE4.png) -32px no-repeat;
+  }
+  
+  
+  .refresh{
+    background:url(https://i.imgur.com/lU9YmE4.png) -96px no-repeat;
+  }
+  
+  .url{
+    color: lightgray;
+    float:left;  
+    width:85%;
+    height:20px;        
+    background:rgba(255,255,255,.5);
+    border-radius:2px;
+    vertical-align: center;
+    overflow: hidden;
+  }
 
   .rain {
     position: absolute;

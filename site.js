@@ -1,10 +1,11 @@
 $(function() {
     var data = [
-        { 
+      { 
             action: 'type',
-            strings: ['hi there, need a developer?', '', '<br>'],
+            strings: ['hi there, need a developer?', '', 'hrm.. let me show you some of my work', '', '<br>'],
             postDelay: 1000
         },
+        
         { 
             action: 'type',
             strings: ["ls -l^400"],
@@ -13,7 +14,7 @@ $(function() {
         },
         {
             action: 'type',
-            strings: ['hrm.. let me show you some of my work','', 'actually, the mood just isn\'t quite <i>right...</i>', ''],
+            strings: [ 'actually, the mood just isn\'t quite <i>right...</i>', ''],
             postDelay: 1000
         },
         {
@@ -24,7 +25,7 @@ $(function() {
         },
         {
             action: 'type',
-            strings: ['ahh, very relaxing', '', 'okay, let me show you something', ''],
+            strings: ['ahh, very relaxing', ''],
             postDelay: 1000
         },
         { 
@@ -72,6 +73,9 @@ $(function() {
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
+                '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
+                '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
+                '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span> You can now view my-portfolio in the browser.',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span> &nbsp; Local: &nbsp;&nbsp;&nbsp;&nbsp; http://localhost:3000',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span> &nbsp; On Your Network: <span class="yellow">https://austin-coffman.github.io/</span>',
@@ -79,12 +83,18 @@ $(function() {
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
                 '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span>',
+                '<span class="lightblue">my-portfolio &nbsp;&nbsp; |</span> Redirecting...',
                 '<br>'
             ],
-            outputDelay: 300,
-            postDelay: 1000
+            outputDelay: 200,
+            postDelay: 13000
         },
-        
+        { 
+          action: 'type',
+          strings: ['<br>'],
+          output: ['<script> $("#popup-window").removeClass("disabled")</script><br>'],
+          postDelay: 3300
+        },
     
   ];
     runScripts(data, 0);
@@ -117,7 +127,7 @@ $(function() {
                                     history.push(element);
                                     prompt.html('');
                                     $('.history').html(history.join('<br>'));
-                                    $('section.terminal').scrollTop($('section.terminal').height());
+                                    $('section.terminal').scrollTop($('#history').height());
                                 }, script.outputDelay*(index+1));
                             })
 
@@ -134,7 +144,7 @@ $(function() {
                             })
 
                             var scrollToEnd = new Promise(function(resolve, reject){
-                                $('section.terminal').scrollTop($('section.terminal').height());
+                              $('section.terminal').scrollTop($('#history').height());
                             })
                             
                         
@@ -151,7 +161,7 @@ $(function() {
                     }); 
                 }
                 // scroll to bottom of screen
-                $('section.terminal').scrollTop($('section.terminal').height());
+                $('section.terminal').scrollTop($('#history').height());
                 // Run next script
                 pos++;
                 if(pos < data.length) {
@@ -167,7 +177,6 @@ $(function() {
             break;
       }
   }
-
 
   $(function(){
 
